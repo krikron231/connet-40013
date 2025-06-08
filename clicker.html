@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Клікер з кейсами</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 36px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .click-btn {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .shop-btn {
+      background-color: #333;
+      color: white;
+    }
+    .case-btn {
+      background-color: #aa00ff;
+      color: white;
+    }
+    .booster {
+      font-weight: bold;
+      color: #00ffcc;
+      margin-top: 10px;
+    }
+    .roulette {
+      margin-top: 20px;
+      padding: 10px;
+      border: 2px dashed white;
+      height: 40px;
+      overflow: hidden;
+      position: relative;
+    }
+    .rolling {
+      position: absolute;
+      white-space: nowrap;
+      animation: roll 2s ease-out;
+    }
+    @keyframes roll {
+      0% { left: 100%; }
+      100% { left: 0%; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🚀 Клікер 3.0</h1>
+  <div id="score">Очки: 0</div>
+  <button class="click-btn" onclick="clickButton()">Клік!</button>
+
+  <h2>🛒 Магазин</h2>
+  <button class="shop-btn" onclick="buyUpgrade()">Супер-клік (+1) – 50 очків</button>
+  <button class="shop-btn" onclick="buyAutoclick()">Автоклік (+1/сек) – 100 очків</button>
+
+  <h2>🎁 Кейс</h2>
+  <button class="case-btn" onclick="openCase()">Відкрити кейс (20 очків)</button>
+  <div class="roulette" id="rouletteBox"></div>
+  <div class="booster" id="boosterStatus"></div>
+
+  <script>
+    let score = parseInt(localStorage.getItem("score")) || 0;
+    let clickPower = parseInt(localStorage.getItem("clickPower")) || 1;
+    let autoclickLevel = parseInt(localStorage.getItem("autoclickLevel")) || 0;
+    let boosterActive = false;
+
+    function updateDisplay() {
+      document.getElementById("score").textContent = "Очки: " + score;
+      localStorage.setItem("score", score);
+      localStorage.setItem("clickPower", clickPower);
+      localStorage.setItem("autoclickLevel", autoclickLevel);
+    }
+
+    function clickButton() {
+      score += clickPower;
+      updateDisplay();
+    }
+
+    function buyUpgrade() {
+      if (score >= 50) {
+        score -= 50;
+        clickPower += 1;
+        updateDisplay();
+      } else {
+        alert("Недостатньо очків!");
+      }
+    }
+
+    function buyAutoclick() {
+      if (score >= 100) {
+        score -= 100;
+        autoclickLevel += 1;
+        updateDisplay();
+      } else {
+        alert("Недостатньо очків!");
+      }
+    }
+
+    function openCase() {
+      if (score < 20) {
+        alert("Недостатньо очків для кейсу!");
+        return;
+      }
+
+      score -= 20;
+      updateDisplay();
+
+      let rewards = [
+        { text: "+10 до кліку на 10 сек", effect: () => activateBooster(10, 10) },
+        { text: "X2 автоклік на 10 сек", effect: () => activateAutoboost(2, 10) },
+        { text: "Нічого не випало 😢", effect: () => {} },
+        { text: "+5 до кліку на 5 сек", effect: () => activateBooster(5, 5) }
+      ];
+
+      let result = rewards[Math.floor(Math.random() * rewards.length)];
+
+      let rollBox = document.getElementById("rouletteBox");
+      rollBox.innerHTML = `<div class="rolling">${rewards.map(r => r.text).join(" - ")}</div>`;
+
+      setTimeout(() => {
+        rollBox.innerHTML = result.text;
+        result.effect();
+      }, 2000);
+    }
+
+    function activateBooster(amount, duration) {
+      if (boosterActive) return;
+      boosterActive = true;
+      clickPower += amount;
+      document.getElementById("boosterStatus").textContent = `Бустер активний: +${amount} до кліку на ${duration} сек`;
+      setTimeout(() => {
+        clickPower -= amount;
+        boosterActive = false;
+        document.getElementById("boosterStatus").textContent = "";
+        updateDisplay();
+      }, duration * 1000);
+    }
+
+    function activateAutoboost(mult, duration) {
+      if (boosterActive) return;
+      boosterActive = true;
+      autoclickLevel *= mult;
+      document.getElementById("boosterStatus").textContent = `Бустер активний: автоклік x${mult} на ${duration} сек`;
+      setTimeout(() => {
+        autoclickLevel = Math.floor(autoclickLevel / mult);
+        boosterActive = false;
+        document.getElementById("boosterStatus").textContent = "";
+        updateDisplay();
+      }, duration * 1000);
+    }
+
+    setInterval(() => {
+      score += autoclickLevel;
+      updateDisplay();
+    }, 1000);
+
+    updateDisplay();
+  </script>
+</body>
+</html>

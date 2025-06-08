@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <title>Країни світу та їхнє населення</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f0f0; }
+    h1 { text-align: center; }
+    table { width: 100%; border-collapse: collapse; background: #fff; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+    th { background-color: #eee; }
+  </style>
+</head>
+<body>
+  <h1>Список країн світу та їхнє населення</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Країна</th>
+        <th>Населення</th>
+      </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
+
+  <script>
+    const countries = [
+      {"name": "Афганістан", "population": 41128771},
+      {"name": "Албанія", "population": 2837743},
+      {"name": "Алжир", "population": 44700000},
+      {"name": "Андорра", "population": 79824},
+      {"name": "Ангола", "population": 35588987},
+      {"name": "Антигуа і Барбуда", "population": 100772},
+      {"name": "Аргентина", "population": 45919049},
+      {"name": "Вірменія", "population": 2963243},
+      {"name": "Австралія", "population": 26786596},
+      {"name": "Австрія", "population": 9104657},
+      {"name": "Азербайджан", "population": 10409500},
+      {"name": "Багами", "population": 412623},
+      {"name": "Бахрейн", "population": 1485509},
+      {"name": "Бангладеш", "population": 170000000},
+      {"name": "Барбадос", "population": 281635},
+      {"name": "Білорусь", "population": 9277000},
+      {"name": "Бельгія", "population": 11589623},
+      {"name": "Беліз", "population": 441471},
+      {"name": "Бенін", "population": 13123285},
+      {"name": "Бутан", "population": 782455},
+      {"name": "Болівія", "population": 12092716},
+      {"name": "Боснія і Герцеговина", "population": 3211000},
+      {"name": "Ботсвана", "population": 2678000},
+      {"name": "Бразилія", "population": 214326223},
+      {"name": "Бруней", "population": 449002},
+      {"name": "Болгарія", "population": 6856885},
+      {"name": "Буркіна-Фасо", "population": 22332000},
+      {"name": "Бурунді", "population": 13180000},
+      {"name": "Камбоджа", "population": 17118000},
+      {"name": "Камерун", "population": 27760000},
+      {"name": "Канада", "population": 38930000},
+      {"name": "Кабо-Верде", "population": 598682},
+      {"name": "Центральноафриканська Республіка", "population": 5682000},
+      {"name": "Чад", "population": 18220000},
+      {"name": "Чилі", "population": 19600000},
+      {"name": "Китай", "population": 1412000000},
+      {"name": "Кіпр", "population": 1242000},
+      {"name": "Колумбія", "population": 51600000},
+      {"name": "Коморські Острови", "population": 852075},
+      {"name": "Демократична Республіка Конго", "population": 108400000},
+      {"name": "Республіка Конго", "population": 6108000},
+      {"name": "Коста-Рика", "population": 5228000},
+      {"name": "Хорватія", "population": 3899000},
+      {"name": "Куба", "population": 11230000},
+      {"name": "Кірибаті", "population": 131232},
+      {"name": "Чеська Республіка", "population": 10710000},
+      {"name": "Данія", "population": 5900000},
+      {"name": "Джибуті", "population": 1122000},
+      {"name": "Домініка", "population": 72000},
+      {"name": "Домініканська Республіка", "population": 11220000},
+      {"name": "Східний Тимор", "population": 1322000},
+      {"name": "Еквадор", "population": 18000000},
+      {"name": "Єгипет", "population": 111000000},
+      {"name": "Сальвадор", "population": 6486000},
+      {"name": "Екваторіальна Гвінея", "population": 1641000},
+      {"name": "Еритрея", "population": 3600000},
+      {"name": "Естонія", "population": 1331000},
+      {"name": "Есватіні", "population": 1193000},
+      {"name": "Ефіопія", "population": 120000000},
+      {"name": "Фіджі", "population": 929766},
+      {"name": "Фінляндія", "population": 5521000},
+      {"name": "Франція", "population": 68000000},
+      {"name": "Габон", "population": 2344000},
+      {"name": "Гамбія", "population": 2761000},
+      {"name": "Грузія", "population": 3714000},
+      {"name": "Німеччина", "population": 84000000},
+      {"name": "Гана", "population": 34100000},
+      {"name": "Греція", "population": 10400000},
+      {"name": "Гренада", "population": 124610},
+      {"name": "Гватемала", "population": 17920000},
+      {"name": "Гвінея", "population": 14100000},
+      {"name": "Гвінея-Бісау", "population": 2164000},
+      {"name": "Гайана", "population": 804567},
+      {"name": "Гаїті", "population": 11300000},
+      {"name": "Гондурас", "population": 10670000},
+      {"name": "Угорщина", "population": 9600000},
+      {"name": "Україна", "population":  37730000},
+      {"name": "Ісландія", "population": 387000},
+      {"name": "Індія", "population": 1393000000},
+      {"name": "Індонезія", "population": 276000000},
+      {"name": "Іран", "population": 86000000},
+      {"name": "Ірак", "population": 43200000},
+      {"name": "Ірландія", "population": 5200000},
+      {"name": "Ізраїль", "population": 9570000},
+      {"name": "Італія", "population": 59000000},
+      {"name": "Ямайка", "population": 2825544},
+      {"name": "Японія", "population": 125000000},
+      {"name": "Йорданія", "population": 11000000},
+      {"name": "Казахстан", "population": 19000000},
+      {"name": "Кенія", "population": 54600000},
+      {"name": "Кірібаті", "population": 131232},
+      {"name": "Південна Корея", "population": 51640000},
+      {"name": "Північна Корея", "population": 25800000},
+      {"name": "Кувейт", "population": 4300000},
+      {"name": "Киргизстан", "population": 6700000},
+      {"name": "Лаос", "population": 7400000},
+      {"name": "Латвія", "population": 1831000},
+      {"name": "Ліван", "population": 5460000},
+      {"name": "Лесото", "population": 2281000},
+      {"name": "Ліберія", "population": 5300000},
+      {"name": "Лівія", "population": 6900000},
+      {"name": "Ліхтенштейн", "population": 39000},
+      {"name": "Литва", "population": 2794000},
+      {"name": "Люксембург", "population": 660000},
+      {"name": "Македонія", "population": 2070000},
+      {"name": "Мадагаскар", "population": 29400000},
+      {"name": "Малаві", "population": 20930000}
+    ];
+
+    const tbody = document.getElementById('table-body');
+
+    countries.forEach(country => {
+      const tr = document.createElement('tr');
+      const tdName = document.createElement('td');
+      tdName.textContent = country.name;
+      const tdPop = document.createElement('td');
+      tdPop.textContent = country.population.toLocaleString('uk-UA'); // форматування чисел з роздільниками
+
+      tr.appendChild(tdName);
+      tr.appendChild(tdPop);
+      tbody.appendChild(tr);
+    });
+  </script>
+</body>
+</html>

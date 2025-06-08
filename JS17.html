@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Сума чисел у діапазоні</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+    .container { max-width: 400px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    label, input, button { display: block; width: 100%; margin-bottom: 10px; }
+    button { background: #4CAF50; color: white; padding: 10px; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #45a049; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Сума чисел у діапазоні</h2>
+    <label for="start">Початок діапазону:</label>
+    <input type="number" id="start" placeholder="Наприклад, 1">
+
+    <label for="end">Кінець діапазону:</label>
+    <input type="number" id="end" placeholder="Наприклад, 10">
+
+    <button onclick="calculateSum()">Обчислити суму</button>
+
+    <h3 id="result"></h3>
+  </div>
+
+  <script>
+    function calculateSum() {
+      const start = parseInt(document.getElementById('start').value);
+      const end = parseInt(document.getElementById('end').value);
+      if (isNaN(start) || isNaN(end)) {
+        document.getElementById('result').textContent = 'Будь ласка, введіть обидва числа.';
+        return;
+      }
+      let sum = 0;
+      for (let i = start; i <= end; i++) {
+        sum += i;
+      }
+      document.getElementById('result').textContent = `Сума чисел від ${start} до ${end} дорівнює ${sum}.`;
+    }
+  </script>
+</body>
+</html>

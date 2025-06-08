@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Кількість кубів</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: #222;
+      color: white;
+    }
+    #frame {
+      width: 400px;
+      height: 400px;
+      background: white;
+      position: relative;
+      overflow: hidden;
+      border: 4px solid #444;
+      margin-top: 20px;
+    }
+    .cube {
+      position: absolute;
+      opacity: 0.9;
+    }
+    input, button {
+      margin: 5px;
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Скільки кубів ти хочеш?</h2>
+  <input type="number" id="numberInput" placeholder="Введи число">
+  <button onclick="generateCubes()">Ввести</button>
+  <button onclick="clearCubes()">Скинути</button>
+
+  <div id="frame"></div>
+
+  <script>
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    function generateCubes() {
+      const frame = document.getElementById('frame');
+      const count = parseInt(document.getElementById('numberInput').value);
+      clearCubes();
+
+      for (let i = 0; i < count; i++) {
+        const cube = document.createElement('div');
+        const size = Math.floor(Math.random() * 80) + 20;
+        cube.className = 'cube';
+        cube.style.width = size + 'px';
+        cube.style.height = size + 'px';
+        cube.style.backgroundColor = getRandomColor();
+        cube.style.left = Math.random() * (400 - size) + 'px';
+        cube.style.top = Math.random() * (400 - size) + 'px';
+        frame.appendChild(cube);
+      }
+    }
+
+    function clearCubes() {
+      const frame = document.getElementById('frame');
+      frame.innerHTML = '';
+    }
+  </script>
+</body>
+</html>

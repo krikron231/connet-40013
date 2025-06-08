@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Таблица умножения</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f8ff;
+        }
+        table {
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        td, th {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: center;
+        }
+        input, button {
+            padding: 8px;
+            margin: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Таблица множення</h1>
+    <table>
+        <tbody>
+            <!-- Сгенерированная таблица -->
+            <script>
+                for (let i = 1; i <= 10; i++) {
+                    document.write('<tr>');
+                    for (let j = 1; j <= 10; j++) {
+                        document.write('<td>' + (i * j) + '</td>');
+                    }
+                    document.write('</tr>');
+                }
+            </script>
+        </tbody>
+    </table>
+
+    <h2>Умножение чисел</h2>
+    <input type="number" id="num1" placeholder="Число 1">
+    <input type="number" id="num2" placeholder="Число 2">
+    <button onclick="multiply()">Умножить</button>
+    <p id="result"></p>
+
+    <script>
+        function multiply() {
+            const num1 = parseInt(document.getElementById('num1').value);
+            const num2 = parseInt(document.getElementById('num2').value);
+            if (!isNaN(num1) && !isNaN(num2)) {
+                document.getElementById('result').textContent = `Результат: ${num1} × ${num2} = ${num1 * num2}`;
+            } else {
+                document.getElementById('result').textContent = 'Пожалуйста, введите оба числа.';
+            }
+        }
+    </script>
+</body>
+</html>

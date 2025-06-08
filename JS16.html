@@ -1,0 +1,75 @@
+<!-- Збережи файл як factorial.html -->
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Факторіал числа</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background: #111827;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      width: 300px;
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      padding: 10px;
+      width: 48%;
+      margin: 5px 1%;
+      border: none;
+      border-radius: 5px;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: white;
+      cursor: pointer;
+    }
+    .result { margin-top: 15px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Факторіал числа n</h2>
+    <input type="number" id="num" placeholder="Число n">
+    <div>
+      <button onclick="calculateFactorial()">Розрахувати</button>
+      <button onclick="reset()">Скинути</button>
+    </div>
+    <div class="result" id="result">Відповідь:</div>
+  </div>
+
+  <script>
+    function calculateFactorial() {
+      const n = parseInt(document.getElementById('num').value);
+      if (isNaN(n) || n < 0) {
+        document.getElementById('result').innerText = 'Введіть невід’ємне ціле число.';
+        return;
+      }
+      let result = 1;
+      for (let i = 2; i <= n; i++) result *= i;
+      document.getElementById('result').innerText = 'Відповідь: ' + result;
+    }
+    function reset() {
+      document.getElementById('num').value = '';
+      document.getElementById('result').innerText = 'Відповідь:';
+    }
+  </script>
+</body>
+</html>

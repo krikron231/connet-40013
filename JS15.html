@@ -1,0 +1,76 @@
+<!-- Збережи файл як power.html -->
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Розрахунок степеня</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background: #111827;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      width: 300px;
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      padding: 10px;
+      width: 48%;
+      margin: 5px 1%;
+      border: none;
+      border-radius: 5px;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: white;
+      cursor: pointer;
+    }
+    .result { margin-top: 15px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Розрахунок степеня xⁿ</h2>
+    <input type="number" id="base" placeholder="Основа x">
+    <input type="number" id="exponent" placeholder="Показник степеня n">
+    <div>
+      <button onclick="calculatePower()">Розрахувати</button>
+      <button onclick="reset()">Скинути</button>
+    </div>
+    <div class="result" id="result">Відповідь:</div>
+  </div>
+
+  <script>
+    function calculatePower() {
+      const x = parseFloat(document.getElementById('base').value);
+      const n = parseInt(document.getElementById('exponent').value);
+      if (isNaN(x) || isNaN(n)) {
+        document.getElementById('result').innerText = 'Введіть правильні значення.';
+        return;
+      }
+      document.getElementById('result').innerText = 'Відповідь: ' + Math.pow(x, n);
+    }
+    function reset() {
+      document.getElementById('base').value = '';
+      document.getElementById('exponent').value = '';
+      document.getElementById('result').innerText = 'Відповідь:';
+    }
+  </script>
+</body>
+</html>

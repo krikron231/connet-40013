@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Рівень навчання</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url("90245597-cb44-4d0d-94ed-2efd7495158f.png");
+      background-size: cover;
+      background-position: center;
+      color: #3a1f0f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 30px 50px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      padding: 10px;
+      width: 60px;
+      font-size: 18px;
+      text-align: center;
+      border: 1px solid #888;
+      border-radius: 8px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px 5px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #444;
+      background-color: #f7f7f7;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #e0e0e0;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Дізнайся, на якому рівні ти навчаєшся</h1>
+    <p>Введи свій середній бал:</p>
+    <input type="number" id="gradeInput" min="1" max="12">
+    <br>
+    <button onclick="checkLevel()">Дізнатися відповідь</button>
+    <button onclick="resetForm()">Скинути</button>
+    <div class="result" id="result">Твій рівень:</div>
+  </div>
+
+  <script>
+    function checkLevel() {
+      const grade = parseInt(document.getElementById("gradeInput").value);
+      let result = "";
+
+      if (isNaN(grade) || grade < 1 || grade > 12) {
+        result = "Введи число від 1 до 12!";
+      } else if (grade <= 3) {
+        result = "Початковий рівень";
+      } else if (grade <= 6) {
+        result = "Середній рівень";
+      } else if (grade <= 9) {
+        result = "Достатній рівень";
+      } else {
+        result = "Високий рівень";
+      }
+
+      document.getElementById("result").innerText = "Твій рівень: " + result;
+    }
+
+    function resetForm() {
+      document.getElementById("gradeInput").value = "";
+      document.getElementById("result").innerText = "Твій рівень:";
+    }
+  </script>
+
+</body>
+</html>

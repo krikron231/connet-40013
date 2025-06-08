@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Компліменти</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f2f2f2;
+      text-align: center;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+    }
+    .compliment {
+      margin: 10px 0;
+      padding: 10px;
+      background: #fffbe6;
+      border-radius: 8px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Отримай компліменти!</h1>
+  <input type="number" id="count" placeholder="Кількість компліментів" min="1" />
+  <button onclick="generateCompliments()">Отримати</button>
+  <div id="result"></div>
+
+  <script>
+    const compliments = [
+      "Ти неймовірно розумний/розумна!",
+      "Твоя посмішка заряджає позитивом!",
+      "Ти надихаєш інших бути кращими!",
+      "У тебе велике серце!",
+      "Ти справжній(ня) друг(подруга)!",
+      "З тобою завжди цікаво!",
+      "Ти випромінюєш доброту!",
+      "Твоя енергія вражає!",
+      "Ти вмієш підняти настрій!",
+      "Твоя харизма неймовірна!"
+    ];
+
+    function generateCompliments() {
+      const count = parseInt(document.getElementById("count").value);
+      const result = document.getElementById("result");
+      result.innerHTML = "";
+
+      if (isNaN(count) || count <= 0) {
+        result.innerHTML = "<p>Введи коректну кількість!</p>";
+        return;
+      }
+
+      for (let i = 0; i < count; i++) {
+        const randomIndex = Math.floor(Math.random() * compliments.length);
+        const compliment = compliments[randomIndex];
+        const div = document.createElement("div");
+        div.className = "compliment";
+        div.textContent = compliment;
+        result.appendChild(div);
+      }
+    }
+  </script>
+</body>
+</html>

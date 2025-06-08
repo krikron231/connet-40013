@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <style type="text/css">
+		div{
+			font-size: 25px; 
+			color: rgb(62, 17, 17);
+			text-align: left;
+            width: 70%;
+            
+            background-color: rgba(71, 129, 255, 0.9);
+            border-radius: 12px;
+            margin-bottom: 30px;
+		}
+		.side{
+			width: 300px;
+			height: 30px;
+			font-size: 25px;
+			text-align: center;
+
+		}
+       
+body{
+    background-image: url(https://img.freepik.com/premium-photo/vibrant-esports-event-background-with-neon-game-controllers-futuristic-digital-elements_43969-62587.jpg?semt=ais_hybrid&w=740);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
+}
+
+
+.btn {
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #1A1A1A;
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: #3B3B3B;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-height: 60px;
+  min-width: 0;
+  outline: none;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-top: 10px;
+  margin-left: 15px;
+  will-change: transform;
+}
+
+.btn:disabled {
+  pointer-events: none;
+}
+
+.btn:hover {
+  color: #fff;
+  background-color: #1A1A1A;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+	h1{
+        font-size: 40px;
+        text-align: center;
+        padding-top: 30px;
+    }	
+p{
+margin-left: 15px;
+margin-right: 15px;
+}
+	</style>
+</head>
+<body>
+<script>
+function Zelenskiy(){
+    let name = document.Zelenskiy.a.value;
+    let answer=document.getElementById("answer1");
+    let lowCaseName = name.toLowerCase(); 
+    if (lowCaseName == 'мечений'||lowCaseName == 'стрелок'){
+        string='Правильно. головний герой- '+name;
+    } else{
+        string='Ви помилились. головний герой Меченый або стрелок';
+    }
+    answer.innerHTML = string;
+}
+
+function Spiderman(){
+    let name = document.Spiderman.a.value;
+    let answer=document.getElementById("answer2");
+    let lowCaseName = name.toLowerCase(); 
+    if (lowCaseName == 'шрам'||lowCaseName == 'найманець'){
+        string='Правильно. головнога героя звати '+name;
+    } else{
+        string='Ви помилились.Цього персонажа звати шрам або найманець.';
+    }
+    answer.innerHTML = string;
+}
+
+function Cinderella(){
+    let name = document.Cinderella.a.value;
+    let answer=document.getElementById("answer3");
+    let lowCaseName = name.toLowerCase(); 
+    if (lowCaseName == 'дегтярьов'||lowCaseName == 'майор олександр дегтярьов'){
+        string='Правильно. Цього персонажа звати '+name;
+    } else{
+        string='Ви помилились. Цього персонажа звати Майор Олександр Дегтярьов або скорочено Дегтярьов.';
+    }
+    answer.innerHTML = string;
+}
+</script>
+
+    
+   <center> <div >
+     <h1>Вікторина про відомих людей та персонажів</h1> 
+     <p style="font-weight: 900 ;">Запитання №1</p> 
+      <p>як звали головного героя з гри сталкер тінь чорнобиля?</p>
+        <form name="Zelenskiy" action="javascript:Zelenskiy()">
+            Введіть вашу відповідь:<input class="side" name="a" type="text" value="" size="4"><br>
+            <input class="btn" type="submit" value="Дізнатись відповідь">
+            <input class="btn" type="reset" name="reset" value="Скинути">
+        </form>
+        <span id="answer1"></span><br/>
+
+
+        <p style="font-weight: 900 ;">Запитання №2</p> 
+      <p>як звали головного героя з гри сталкер чистое небо?</p>
+        <form name="Spiderman" action="javascript:Spiderman()">
+            Введіть вашу відповідь:<input class="side" name="a" type="text" value="" size="4"><br>
+            <input class="btn" type="submit" value="Дізнатись відповідь">
+            <input class="btn" type="reset" name="reset" value="Скинути">
+        </form>
+        <span id="answer2"></span><br/>
+
+
+        <p style="font-weight: 900 ;">Запитання №3</p> 
+      <p>як звали головного героя з гри сталкер зов припяти?</p>
+        <form name="Cinderella" action="javascript:Cinderella()">
+            Введіть вашу відповідь:<input class="side" name="a" type="text" value="" size="4"><br>
+            <input class="btn" type="submit" value="Дізнатись відповідь">
+            <input class="btn" type="reset" name="reset" value="Скинути">
+        </form>
+        <span id="answer3"></span><br/>
+    </div></center>
+</body>
+</html>

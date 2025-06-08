@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Анімований вхід</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+    .menu {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      width: 250px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      opacity: 0;
+      transform: translateY(-50px);
+      animation: fadeIn 1s forwards;
+      position: relative;
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .logout {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      color: #888;
+    }
+    #adPage {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      animation: fadeIn 1s forwards;
+    }
+    .ad-box {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      max-width: 400px;
+    }
+    .ad-box h2 {
+      margin-bottom: 15px;
+    }
+    .ad-box p {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="menu" id="loginMenu">
+    <button class="logout" onclick="logout()" title="Вийти">⎋</button>
+    <h3>   Ласкаво просимо</h3>
+    <h3>ведіть нікнейм та пароль</h3>
+    <h3>рандом</h3>
+    <input type="text" id="login" placeholder="Нікнейм">
+    <input type="password" id="password" placeholder="Пароль">
+    <button onclick="saveLogin()">Увійти</button>
+    <div class="message" id="message"></div>
+  </div>
+
+  <div id="adPage">
+    <div class="ad-box">
+      <h2>Реклама</h2>
+      <p>Дякуємо, що увійшли в систему, <span id="username"></span>!</p>
+      <p>зайди на сайт пж пж пж → <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">важливо!!!</a></p>
+      <button onclick="logout()">Вийти</button>
+    </div>
+  </div>
+
+  <script>
+    function saveLogin() {
+      const login = document.getElementById('login').value;
+      const password = document.getElementById('password').value;
+      if (login && password) {
+        localStorage.setItem('userLogin', login);
+        localStorage.setItem('userPassword', password);
+        showAdPage(login);
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('userLogin');
+      localStorage.removeItem('userPassword');
+      location.reload();
+    }
+
+    function showAdPage(user) {
+      document.getElementById('loginMenu').style.display = 'none';
+      document.getElementById('adPage').style.display = 'flex';
+      document.getElementById('username').textContent = user;
+    }
+
+    window.onload = function() {
+      const savedLogin = localStorage.getItem('userLogin');
+      const savedPassword = localStorage.getItem('userPassword');
+      if (savedLogin && savedPassword) {
+        showAdPage(savedLogin);
+      }
+    }
+  </script>
+</body>
+</html>

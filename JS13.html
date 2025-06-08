@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <title>Спамер</title>
+  <style>
+    body {
+      background-color: #1e1e1e;
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+    }
+
+    #output {
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      color: black;
+      width: 400px;
+      height: 300px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h2>Що спамити і скільки разів?</h2>
+  <input type="text" id="textInput" placeholder="Введи текст"><br>
+  <input type="number" id="countInput" placeholder="Скільки разів"><br>
+  <button onclick="startSpam()">Спамити</button>
+  <button onclick="clearSpam()">Скинути</button>
+
+  <div id="output"></div>
+
+  <script>
+    function startSpam() {
+      const text = document.getElementById("textInput").value;
+      const count = parseInt(document.getElementById("countInput").value);
+      const output = document.getElementById("output");
+      output.innerText = "";
+
+      if (!text || isNaN(count) || count <= 0) {
+        output.innerText = "Введи коректні дані!";
+        return;
+      }
+
+      let spam = "";
+      for (let i = 0; i < count; i++) {
+        spam += text + "\n";
+      }
+      output.innerText = spam;
+    }
+
+    function clearSpam() {
+      document.getElementById("textInput").value = "";
+      document.getElementById("countInput").value = "";
+      document.getElementById("output").innerText = "";
+    }
+  </script>
+</body>
+</html>
